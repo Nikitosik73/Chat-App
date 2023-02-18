@@ -1,16 +1,13 @@
 package com.example.chatapp.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.chatapp.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.chatapp.databinding.ActivityLoginBinding;
-import com.google.android.gms.common.internal.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -56,7 +53,10 @@ public class LoginActivity extends AppCompatActivity {
         binding.textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ForgotPasswordActivity.newIntent(LoginActivity.this);
+                Intent intent = ForgotPasswordActivity.newIntent(
+                        LoginActivity.this,
+                        binding.editTextInputEmail.getText().toString().trim()
+                        );
                 startActivity(intent);
             }
         });
