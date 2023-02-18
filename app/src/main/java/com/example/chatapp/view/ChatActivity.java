@@ -3,6 +3,7 @@ package com.example.chatapp.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,5 +35,9 @@ public class ChatActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static Intent newIntent(Context context){
+        return new Intent(context, ChatActivity.class);
     }
 }

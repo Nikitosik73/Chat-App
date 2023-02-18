@@ -1,94 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:background="@color/light_grey"
     tools:context=".view.RegistrationActivity">
 
-    <TextView
-        android:id="@+id/textViewRegistrations"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registration2"
-        android:textAlignment="center"
-        android:textColor="@color/teal"
-        android:fontFamily="@font/inter_black"
-        android:textSize="36sp"
-        android:layout_marginTop="110dp"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editInputEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/email"
-        android:background="@drawable/edit_email_bg"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"/>
+        <TextView
+            android:id="@+id/textViewRegistrations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registration2"
+            android:textAlignment="center"
+            android:textColor="@color/teal"
+            android:fontFamily="@font/inter_black"
+            android:textSize="36sp"
+            android:layout_margin="10dp"/>
 
-    <EditText
-        android:id="@+id/editTextInputPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/password"
-        android:background="@drawable/edit_email_bg"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"/>
+        <EditText
+            android:id="@+id/editInputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            android:background="@drawable/edit_email_bg"
+            android:padding="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"/>
 
-    <EditText
-        android:id="@+id/editInputName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/name"
-        android:background="@drawable/edit_email_bg"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"/>
+        <EditText
+            android:id="@+id/editTextInputPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:background="@drawable/edit_email_bg"
+            android:padding="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"/>
 
-    <EditText
-        android:id="@+id/editInputLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/last_name"
-        android:background="@drawable/edit_email_bg"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"/>
+        <EditText
+            android:id="@+id/editInputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:hint="@string/name"
+            android:background="@drawable/edit_email_bg"
+            android:padding="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"/>
 
-    <EditText
-        android:id="@+id/editInputAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/your_age"
-        android:background="@drawable/edit_email_bg"
-        android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"/>
+        <EditText
+            android:id="@+id/editInputLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:hint="@string/last_name"
+            android:background="@drawable/edit_email_bg"
+            android:padding="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonResetPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/registration"
-        android:textColor="@color/teal"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:background="@drawable/btn_bg"/>
+        <EditText
+            android:id="@+id/editInputAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/your_age"
+            android:background="@drawable/edit_email_bg"
+            android:padding="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"/>
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonResetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/registration"
+            android:textColor="@color/teal"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/btn_bg"/>
+
+    </LinearLayout>
+
+</ScrollView>

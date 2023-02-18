@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -46,10 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
                 } else {
-                    Intent intent = new Intent(
-                            LoginActivity.this,
-                            ChatActivity.class
-                    );
+                    Intent intent = ChatActivity.newIntent(LoginActivity.this);
                     startActivity(intent);
                 }
                 // login
@@ -58,20 +56,14 @@ public class LoginActivity extends AppCompatActivity {
         binding.textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        LoginActivity.this,
-                        ForgotPasswordActivity.class
-                );
+                Intent intent = ForgotPasswordActivity.newIntent(LoginActivity.this);
                 startActivity(intent);
             }
         });
         binding.textViewRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        LoginActivity.this,
-                        RegistrationActivity.class
-                );
+                Intent intent = RegistrationActivity.newIntent(LoginActivity.this);
                 startActivity(intent);
             }
         });
