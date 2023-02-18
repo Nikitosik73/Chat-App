@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Chat App</string>
+    <string name="sign_out">SignOut</string>
+    <string name="title_app">Messenger</string>
+    <string name="email">Введите ваш email:</string>
+    <string name="password">Введите ваш пароль:</string>
+    <string name="enter">Войти</string>
+    <string name="forgot_pass">Сбросить пароль</string>
+    <string name="registration">Зарегестрироваться</string>
+    <string name="forgot_password">Восстановить пароль?</string>
+    <string name="reset_pass">Сбросить пароль</string>
+    <string name="registration2">Регистрация</string>
+    <string name="name">Введите ваше имя:</string>
+    <string name="last_name">Введите вашу фамилию</string>
+    <string name="your_age">Введите ваш возраст:</string>
 </resources>
