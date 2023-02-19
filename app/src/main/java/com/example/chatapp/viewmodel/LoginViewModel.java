@@ -60,7 +60,6 @@ public class LoginViewModel extends AndroidViewModel {
                             error.setValue(e.getMessage());
                         }
                     });
-
         }
     }
 }
