@@ -1,19 +1,26 @@
 package com.example.chatapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.chatapp.databinding.ActivityRegistrationBinding;
+import com.example.chatapp.viewmodel.RegistrationViewModel;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private ActivityRegistrationBinding binding;
+
+    private RegistrationViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,10 @@ public class RegistrationActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        viewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
+
+        observable();
+
         binding.buttonResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,10 +40,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password = getTrimmedValue(binding.editTextInputPassword);
                 String name = getTrimmedValue(binding.editInputName);
                 String lastName = getTrimmedValue(binding.editInputLastName);
-                int age = Integer.parseInt(getTrimmedValue(binding.editInputAge));
+                String age = getTrimmedValue(binding.editInputAge);
 
                 if (
-                        email.isEmpty() && password.isEmpty() && name.isEmpty() && lastName.isEmpty()
+                        email.isEmpty() && password.isEmpty() && name.isEmpty()
+                                && lastName.isEmpty() && age.isEmpty()
                 ) {
                     Toast.makeText(
                             RegistrationActivity.this,
@@ -63,15 +75,43 @@ public class RegistrationActivity extends AppCompatActivity {
                             "Вы не заполнили поле lastname!",
                             Toast.LENGTH_SHORT
                     ).show();
-                } else {
-                    Intent intent = new Intent(
+                } else if (age.isEmpty()) {
+                    Toast.makeText(
                             RegistrationActivity.this,
-                            ChatActivity.class
-                    );
-                    startActivity(intent);
+                            "Вы не заполнили поле age!",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 }
 
                 // create account
+                viewModel.registration(email, password, name, lastName, age);
+            }
+        });
+    }
+
+    private void observable(){
+
+        viewModel.getError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String error) {
+                if (error != null) {
+                    Toast.makeText(
+                            RegistrationActivity.this,
+                            error,
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
+            }
+        });
+        viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+
+                if (firebaseUser != null){
+                    Intent intent = ChatActivity.newIntent(RegistrationActivity.this);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

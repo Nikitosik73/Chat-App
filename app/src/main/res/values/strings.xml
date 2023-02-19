@@ -13,4 +13,5 @@
     <string name="name">Введите ваше имя:</string>
     <string name="last_name">Введите вашу фамилию</string>
     <string name="your_age">Введите ваш возраст:</string>
+    <string name="send_email">Ссылка для сброса пароля отправлена вам на почту</string>
 </resources>
