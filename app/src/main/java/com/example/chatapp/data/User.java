@@ -16,6 +16,10 @@ public class User {
         this.isOnline = isOnline;
     }
 
+    public User(){
+
+    }
+
     public String getId() {
         return id;
     }
@@ -34,5 +38,16 @@ public class User {
 
     public boolean isOnline() {
         return isOnline;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", isOnline=" + isOnline +
+                '}';
     }
 }
