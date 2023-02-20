@@ -2,7 +2,6 @@ package com.example.chatapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -77,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null) {
-                    Intent intent = ChatActivity.newIntent(LoginActivity.this);
+                    Intent intent = UsersActivity.newIntent(LoginActivity.this);
                     startActivity(intent);
                     finish();
                 }

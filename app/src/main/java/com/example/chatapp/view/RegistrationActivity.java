@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -108,7 +107,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onChanged(FirebaseUser firebaseUser) {
 
                 if (firebaseUser != null){
-                    Intent intent = ChatActivity.newIntent(RegistrationActivity.this);
+                    Intent intent = UsersActivity.newIntent(RegistrationActivity.this);
                     startActivity(intent);
                     finish();
                 }

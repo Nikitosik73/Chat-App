@@ -12,7 +12,7 @@
         android:theme="@style/Theme.ChatApp"
         tools:targetApi="31" >
         <activity
-            android:name=".view.ChatActivity"
+            android:name=".view.UsersActivity"
             android:exported="false" />
         <activity
             android:name=".view.RegistrationActivity"

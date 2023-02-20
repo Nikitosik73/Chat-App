@@ -10,13 +10,13 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ChatViewModel extends AndroidViewModel {
+public class UsersViewModel extends AndroidViewModel {
 
     private FirebaseAuth auth;
 
     private MutableLiveData<FirebaseUser> user = new MutableLiveData<>();
 
-    public ChatViewModel(@NonNull Application application) {
+    public UsersViewModel(@NonNull Application application) {
         super(application);
         auth = FirebaseAuth.getInstance();
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
