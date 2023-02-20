@@ -39,9 +39,6 @@ public class UsersActivity extends AppCompatActivity {
 
     private ActivityUsersBinding binding;
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,49 +46,16 @@ public class UsersActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-//        for (int i = 0; i < 20; i++){
-//            User user = new User(
-//                    "id" + i,
-//                    "name" + i,
-//                    "lastname" + i,
-//                    i,
-//                    new Random().nextBoolean()
-//            );
-//            databaseReference.push().setValue(user);
-//        }
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    User value = dataSnapshot.getValue(User.class);
-                    Log.d(TAG, "Value: " + value.toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "Ошибка чтении данных", error.toException());
-            }
-        });
-
         viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 
         binding.recyclerViewUsers.setAdapter(usersAdapter);
 
-        // Проверка адаптера
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < 20; i++){
-            User user = new User(
-                    "id" + i,
-                    "Nikita" + i,
-                    "Paramonov" + i,
-                    i,
-                    new Random().nextBoolean()
-            );
-            users.add(user);
-        }
-        usersAdapter.setUsers(users);
+        viewModel.getUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                usersAdapter.setUsers(users);
+            }
+        });
 
         viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
             @Override

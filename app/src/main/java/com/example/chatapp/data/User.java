@@ -5,10 +5,10 @@ public class User {
     private String id;
     private String name;
     private String lastName;
-    private int age;
+    private String age;
     private boolean isOnline;
 
-    public User(String id, String name, String lastName, int age, boolean isOnline) {
+    public User(String id, String name, String lastName, String age, boolean isOnline) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -32,7 +32,7 @@ public class User {
         return lastName;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
