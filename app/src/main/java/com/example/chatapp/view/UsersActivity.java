@@ -33,6 +33,10 @@ public class UsersActivity extends AppCompatActivity {
 
     private static final String TAG = "UsersActivity";
 
+    private static final String EXTRA_CURRENT_USER_ID = "currentId";
+
+    private String currentUserId;
+
     private UsersViewModel viewModel;
 
     private UsersAdapter usersAdapter = new UsersAdapter();
@@ -45,6 +49,8 @@ public class UsersActivity extends AppCompatActivity {
         binding = ActivityUsersBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        currentUserId = getIntent().getStringExtra(EXTRA_CURRENT_USER_ID);
 
         viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
 
@@ -60,7 +66,7 @@ public class UsersActivity extends AppCompatActivity {
         viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
-                if (firebaseUser == null){
+                if (firebaseUser == null) {
                     Intent intent = new Intent(
                             UsersActivity.this,
                             LoginActivity.class
@@ -68,6 +74,18 @@ public class UsersActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+
+        usersAdapter.setOnUsersClickListener(new UsersAdapter.onUsersClickListener() {
+            @Override
+            public void onUserClick(User user) {
+                Intent intent = ChatActivity.newIntent(
+                        UsersActivity.this,
+                        currentUserId,
+                        user.getId()
+                );
+                startActivity(intent);
             }
         });
     }
@@ -80,13 +98,15 @@ public class UsersActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menuChat){
+        if (item.getItemId() == R.id.menuChat) {
             viewModel.logout();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public static Intent newIntent(Context context){
-        return new Intent(context, UsersActivity.class);
+    public static Intent newIntent(Context context, String currentUserId) {
+        Intent intent = new Intent(context, UsersActivity.class);
+        intent.putExtra(EXTRA_CURRENT_USER_ID, currentUserId);
+        return intent;
     }
 }

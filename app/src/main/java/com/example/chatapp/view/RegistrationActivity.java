@@ -88,7 +88,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void observable(){
+    private void observable() {
 
         viewModel.getError().observe(this, new Observer<String>() {
             @Override
@@ -106,8 +106,11 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
 
-                if (firebaseUser != null){
-                    Intent intent = UsersActivity.newIntent(RegistrationActivity.this);
+                if (firebaseUser != null) {
+                    Intent intent = UsersActivity.newIntent(
+                            RegistrationActivity.this,
+                            firebaseUser.getUid()
+                    );
                     startActivity(intent);
                     finish();
                 }
@@ -115,11 +118,11 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private String getTrimmedValue(EditText editText){
+    private String getTrimmedValue(EditText editText) {
         return editText.getText().toString().trim();
     }
 
-    public static Intent newIntent(Context context){
+    public static Intent newIntent(Context context) {
         return new Intent(context, RegistrationActivity.class);
     }
 }
