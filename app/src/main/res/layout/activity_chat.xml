@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".view.ChatActivity">
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Paramonov Nikita"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter_bold"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:background="@drawable/user_info_bg"/>
+
+    <View
+        android:id="@+id/viewIsStatus"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_margin="16dp"
+        tools:background="@drawable/circle_green"
+        app:layout_constraintTop_toTopOf="@+id/textViewUser"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewUser"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUser"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSendMessage"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/my_message_item"
+        tools:itemCount="3"/>
+
+    <EditText
+        android:id="@+id/editTextSendMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="@string/send_message"
+        android:inputType="textMultiLine"
+        tools:text="text text text text text text text text text text text text text text text text"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="48dp"
+        android:background="@drawable/send_message_bg"/>
+
+    <ImageView
+        android:id="@+id/imageViewSendMessage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:tint="@color/teal"
+        android:src="@android:drawable/ic_menu_send"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextSendMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextSendMessage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
