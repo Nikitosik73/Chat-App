@@ -31,6 +31,7 @@ public class ChatViewModel extends ViewModel {
     private String currentUserId;
     private String otherUserId;
 
+
     public ChatViewModel(String currentUserId, String otherUserId) {
         this.currentUserId = currentUserId;
         this.otherUserId = otherUserId;
@@ -66,6 +67,10 @@ public class ChatViewModel extends ViewModel {
 
             }
         });
+    }
+
+    public void setUserIsStatus(boolean isOnline){
+        referenceUsers.child(currentUserId).child("online").setValue(isOnline);
     }
 
     public MutableLiveData<List<Message>> getMessages() {

@@ -91,6 +91,18 @@ public class UsersActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.setUserIsOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.setUserIsOnline(false);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
