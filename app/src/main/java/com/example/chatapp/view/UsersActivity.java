@@ -33,7 +33,7 @@ public class UsersActivity extends AppCompatActivity {
 
     private static final String TAG = "UsersActivity";
 
-    private static final String EXTRA_CURRENT_USER_ID = "currentId";
+    private static final String EXTRA_CURRENT_USER_ID = "current_id";
 
     private String currentUserId;
 

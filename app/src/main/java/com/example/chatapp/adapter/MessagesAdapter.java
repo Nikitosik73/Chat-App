@@ -36,7 +36,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layoutResId;
-        if (viewType == VIEW_TYPE_MY_MESSAGE){
+        if (viewType == VIEW_TYPE_MY_MESSAGE) {
             layoutResId = R.layout.my_message_item;
         } else {
             layoutResId = R.layout.your_message_item;
@@ -48,23 +48,24 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         );
         return new MessageViewHolder(view);
     }
+
     // Проверяем кто отправил сообщение
     @Override
     public int getItemViewType(int position) {
 
         Message message = messages.get(position);
-        if (message.getSenderId().equals(currentUserId)){
+        if (currentUserId.equals(message.getSenderId())) {
             return VIEW_TYPE_MY_MESSAGE;
         } else {
             return VIEW_TYPE_YOUR_MESSAGE;
         }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
 
         Message message = messages.get(position);
-
         holder.textViewMessage.setText(message.getText());
     }
 
@@ -73,7 +74,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         return messages.size();
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder{
+    public static class MessageViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewMessage;
 
         public MessageViewHolder(@NonNull View itemView) {

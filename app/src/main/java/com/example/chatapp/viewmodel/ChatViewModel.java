@@ -1,10 +1,6 @@
 package com.example.chatapp.viewmodel;
 
-import android.app.Application;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -24,13 +20,13 @@ import java.util.List;
 public class ChatViewModel extends ViewModel {
 
     private MutableLiveData<List<Message>> messages = new MutableLiveData<>();
-    private MutableLiveData<User> otherUser = new MutableLiveData<>();
-    private MutableLiveData<Boolean> sentMessage = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
+    private MutableLiveData<Boolean> messageSend = new MutableLiveData<>();
+    private MutableLiveData<User> otherUser = new MutableLiveData<>();
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference referenceUsers = database.getReference("Users");
-    private DatabaseReference referenceMessages = database.getReference("Messages");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference referenceUsers = database.getReference("Users");
+    DatabaseReference referenceMessages = database.getReference("Messages");
 
     private String currentUserId;
     private String otherUserId;
@@ -51,65 +47,62 @@ public class ChatViewModel extends ViewModel {
 
             }
         });
-        // получаем список сообщений между двумя пользователями
+        // получаем список всех сообщений
         referenceMessages
                 .child(currentUserId)
-                .child(otherUserId)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                .child(otherUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Message> messageList = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Message message = dataSnapshot.getValue(Message.class);
+                    messageList.add(message);
+                }
+                messages.setValue(messageList);
+            }
 
-                        List<Message> messageList = new ArrayList<>();
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            Message message = snapshot.getValue(Message.class);
-                            messageList.add(message);
-                        }
-                        messages.setValue(messageList);
-                    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+            }
+        });
     }
 
-    public LiveData<List<Message>> getMessages() {
+    public MutableLiveData<List<Message>> getMessages() {
         return messages;
     }
 
-    public LiveData<User> getOtherUser() {
-        return otherUser;
-    }
-
-    public LiveData<Boolean> getSentMessage() {
-        return sentMessage;
-    }
-
-    public LiveData<String> getError() {
+    public MutableLiveData<String> getError() {
         return error;
     }
 
+    public MutableLiveData<Boolean> getMessageSend() {
+        return messageSend;
+    }
+
+    public MutableLiveData<User> getOtherUser() {
+        return otherUser;
+    }
+
     public void sendMessage(Message message){
-        // сохраняем сообщение у отправителя
+
         referenceMessages
-                .child(message.getSenderId())
-                .child(message.getReceiverId())
+                .child(currentUserId)
+                .child(otherUserId)
                 .push()
                 .setValue(message)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        // сохраняем сообщение у получателя
                         referenceMessages
-                                .child(message.getReceiverId())
-                                .child(message.getSenderId())
+                                .child(otherUserId)
+                                .child(currentUserId)
                                 .push()
                                 .setValue(message)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        sentMessage.setValue(true);
+                                        messageSend.setValue(true);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
