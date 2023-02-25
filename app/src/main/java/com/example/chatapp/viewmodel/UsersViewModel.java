@@ -82,6 +82,7 @@ public class UsersViewModel extends AndroidViewModel {
     }
 
     public void logout() {
+        setUserIsOnline(false);
         auth.signOut();
     }
 
